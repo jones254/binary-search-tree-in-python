@@ -1,0 +1,146 @@
+import math
+
+final_grade_list = []
+Assessment_1_list = []
+Assessment_2_list = []
+Assessment_3_list = []
+grade_point_value = {'HD':4.0, 'D':3.0, 'C':2.0, 'P':1.0, 'SP':0.5, 'F':0}
+
+while True:
+
+    Results = list(input("Enter a student's assessment marks(separated by comma), type in letter n to finish:  ").split(','))
+   
+    if  str.upper(Results[0]) == 'N':
+        # function to break the loop
+         break 
+
+    else:
+        Assessment_1 = float(Results[0])
+        Assessment_1_list.append(Assessment_1)
+
+        Assessment_2 = float(Results[1])
+        Assessment_2_list.append(Assessment_2)
+
+        Assessment_3 = float(Results[2])
+        Assessment_3_list.append(Assessment_3)
+         
+        All_Assessments = ( Assessment_1, Assessment_2, Assessment_3 )
+        
+        final_mark = math.ceil( Assessment_1 * 0.2 + Assessment_2 * 0.4 + Assessment_3 * 0.4 )
+       
+
+    if final_mark >= 85:
+        # final_mark is above 85, gets High Distinction
+        grade = 'HD'
+        final_grade_list.append(grade)
+
+
+    elif final_mark in range(75, 85):
+        # final_mark is between 74 and 85, gets Distiction 
+        grade = 'D'
+        final_grade_list.append(grade)
+
+
+    elif final_mark in range(65, 75):
+        # final_mark is between 64 and 74, gets Credit
+        grade = 'C'
+        final_grade_list.append(grade)
+
+
+    elif final_mark in range(50, 65):
+        # final_mark is between 49 and 65, gets Pass
+        grade = 'P' 
+        final_grade_list.append(grade)
+
+
+    elif final_mark in range(45, 50) and ( score > 0 for score in All_Assessments ) and  ( sum(score < 50 for score in All_Assessments )<=1):
+        # final_mark is between 44 and 50, and score for each is greater than zero, and only one assessment can have a score less than 50, gets Supplimentary
+        score = int ( input ( 'enter supplimentary exam mark: '))
+        if score >= 50:
+            final_grade_list.append('SP') 
+
+        else:
+            final_grade_list.append('F')      
+    
+
+
+        
+    elif ( sum(score == 0 for score in All_Assessments ) > 1) and final_mark < 45:  
+        # final_mark is less than 45 amd two or more Assessment is zero, get Absent Fail.
+        grade = 'AF'
+        final_grade_list.append(grade)
+  
+
+    else:
+        grade = 'F' 
+        final_grade_list.append(grade)
+
+
+number_of_students = len(final_grade_list) 
+print(f'The number of students:  {number_of_students}')
+
+
+student_pass =  final_grade_list.count ('HD') + final_grade_list.count ('D') + final_grade_list.count ('C') + final_grade_list.count ('P') + final_grade_list.count ('SP') 
+student_pass_rate = round((student_pass / number_of_students) * 100 , 2  )     
+print (f"student's pass rate:  {student_pass_rate} %")
+
+
+student_pass_rate_adjusted = round ( student_pass / (number_of_students - final_grade_list.count( 'AF' )) * 100 , 2 )      
+print(f"student's pass rate(adjusted):  {student_pass_rate_adjusted} % ")
+
+
+average_assessment_1 = round( sum( Assessment_1_list ) /  number_of_students , 2 )
+print (f"Average mark for assessment 1:  {average_assessment_1}")
+
+
+average_assessment_2 = round( sum( Assessment_2_list ) /  number_of_students , 2 )
+print (f"Average mark for assessment 2:  {average_assessment_2}")
+
+
+average_assessment_3 = round( sum( Assessment_3_list ) /  number_of_students , 2 )
+print (f"Average mark for assessment 3:  {average_assessment_3}")
+ 
+
+average_final_mark =float( math.ceil((average_assessment_1 + average_assessment_2 + average_assessment_3) / 3 ))
+print (f"Average final mark:  {average_final_mark}")
+
+
+grade_point = ( final_grade_list.count('HD') * grade_point_value['HD']) + ( final_grade_list.count('D') * grade_point_value['D']) + ( final_grade_list.count('C') * grade_point_value['C'])  + (final_grade_list.count('P') * grade_point_value['P'] ) + (final_grade_list.count('SP') * grade_point_value['SP']) +  (final_grade_list.count('F') * grade_point_value['F'])
+average_grade_point = grade_point / number_of_students
+print(f"Average grade point  {average_grade_point}")
+
+
+students_with_HD = final_grade_list.count('HD')
+#  students with High Distinction
+print(f" Number of HDs:  {students_with_HD}")
+
+
+students_with_Ds = final_grade_list.count('D')
+#  students with Distinction 
+print(f" Number of Ds:  {students_with_Ds}")
+
+
+students_with_Cs = final_grade_list.count('C')
+# The number of students with Credit 
+print(f" Number of Cs:  {students_with_Cs}")
+
+
+students_with_Ps = final_grade_list.count('P')
+# The number of students with Pass 
+print(f" Number of Ps:  {students_with_Ps}")
+ 
+
+students_with_SPs = final_grade_list.count('SP')
+# The number of students with Supplementary Assessment
+print(f" Number of SPs:  {students_with_SPs}")
+
+
+students_with_Fs = final_grade_list.count('F')
+# The number of students with Fail 
+print(f" Number of Fs:  {students_with_Fs}")
+
+
+
+
+
+

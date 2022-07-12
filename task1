@@ -1,0 +1,49 @@
+import math
+
+def Assessment_number(Assessment_1, Assessment_2, Assessment_3):
+    # A function to calculate the grade of the student
+    
+    final_mark = math.ceil( Assessment_1 * 0.2 + Assessment_2 * 0.4 + Assessment_3 * 0.4 )
+    All_Assessments = ( Assessment_1, Assessment_2, Assessment_3 )
+    # All_Assessment is a tuple storing all the Assessment marks
+
+    if final_mark >= 85:
+        # final_mark is above 85, gets High Distinction
+        grade = 'HD'
+        return grade
+
+    elif final_mark in range(75, 85):
+        # final_mark is between 74 and 85, gets Distiction 
+        grade = 'D'
+        return grade
+
+    elif final_mark in range(65, 75):
+        # final_mark is between 64 and 74, gets Credit
+        grade = 'C'
+        return grade
+
+    elif final_mark in range(50, 65):
+        # final_mark is between 49 and 65, gets Pass
+        grade = 'P' 
+        return grade
+
+    elif final_mark in range(45, 50) and ( score > 0 for score in All_Assessments ) and  ( sum(score < 50 for score in All_Assessments )<=1):
+        # final_mark is between 44 and 50, and score for each is greater than zero, and only one assessment can have a score less than 50, gets 
+        grade = 'SE'
+        return grade
+
+        
+    elif ( sum(score == 0 for score in All_Assessments ) > 1) and final_mark < 45:  
+        # final_mark is less than 45 amd two or more Assessment is zero, get Absent Fail.
+        grade = 'AF'
+        return grade  
+
+    else:
+        grade = 'F' 
+        return  grade 
+
+ 
+             
+Assessment_1, Assessment_2, Assessment_3 = ( float( score ) for score in input("Enter a student's assessment marks(separated by comma):  ").split(',')  )
+grade = Assessment_number( Assessment_1, Assessment_2, Assessment_3 ) 
+print( grade)   
